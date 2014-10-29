@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp" >
+
+    <com.loopj.android.image.SmartImageView
+        android:id="@+id/img_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/tx_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/img_icon"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tx_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tx_title"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:id="@+id/tx_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tx_source"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/tx_source" />
+
+    <TextView
+        android:id="@+id/tx_create_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tx_source"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/tx_nickname" />
+
+</RelativeLayout>

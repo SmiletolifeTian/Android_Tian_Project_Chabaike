@@ -9,6 +9,7 @@ import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,14 +18,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.widget.Toast;
 
 import com.tian.project.chabaike.R;
-import com.tian.project.chabaike.fragment.ContentFragment;
+import com.tian.project.chabaike.fragment.OtherFragment;
 import com.tian.project.chabaike.fragment.HeadLineFragment;
 import com.tian.project.chabaike.fragment.HomePageViewpPager;
 
 public class MainActivity extends FragmentActivity implements TabListener,
 		OnPageChangeListener {
+	private static final String KEY_IS_UPDATE = "is_update";
+	private static final int ACTIONBAR_ITEM_COUNT = 6;
 	public static final String KEY_FRAGMENT_ID = "fragment_id";
 	private ViewPager vpMain;
 	private List<Fragment> fragments;
@@ -37,6 +41,7 @@ public class MainActivity extends FragmentActivity implements TabListener,
 		initUI();
 		initNavi();
 		initData();
+		initUpdate();
 	}
 
 	private void initUI() {
@@ -65,7 +70,7 @@ public class MainActivity extends FragmentActivity implements TabListener,
 			if (i == 0) {
 				f = new HeadLineFragment();
 			} else {
-				f = new ContentFragment();
+				f = new OtherFragment();
 			}
 
 			Bundle bundle = new Bundle();
@@ -79,10 +84,19 @@ public class MainActivity extends FragmentActivity implements TabListener,
 
 	}
 
+	private void initUpdate() {
+		SharedPreferences sp = getSharedPreferences(WelcomeActivity.INIT_PARAMS, MODE_PRIVATE);
+		boolean isUpdate = sp.getBoolean(KEY_IS_UPDATE, true);
+		if(isUpdate){
+			
+		}
+	}
+
 	/* -------------------- TabListener -------------------- */
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		if (tab.getPosition() == getActionBar().getTabCount() - 1) {
+		if (tab.getPosition() == ACTIONBAR_ITEM_COUNT - 1) {
+			getActionBar().setSelectedNavigationItem(tab.getPosition()-1);
 			startActivity(new Intent(this, MoreActivity.class));
 		} else {
 			vpMain.setCurrentItem(tab.getPosition());
@@ -108,16 +122,18 @@ public class MainActivity extends FragmentActivity implements TabListener,
 	}
 
 	@Override
-	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+	public void onPageScrolled(int position, float positionOffset,
+			int positionOffsetPixels) {
 	}
 
 	@Override
 	public void onPageSelected(int position) {
-		if (position == getActionBar().getTabCount() - 1) {
-			startActivity(new Intent(this, MoreActivity.class));
-		} else {
+		if (position < ACTIONBAR_ITEM_COUNT - 1) {
 			getActionBar().setSelectedNavigationItem(position);
+		} else {
+			getActionBar().setSelectedNavigationItem(position - 1);
+			vpMain.setCurrentItem(position - 1);
+			startActivity(new Intent(this, MoreActivity.class));
 		}
 	}
 

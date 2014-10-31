@@ -9,7 +9,7 @@ import android.os.CountDownTimer;
 import com.tian.project.chabaike.R;
 
 public class WelcomeActivity extends Activity {
-	private static final String INIT_PARAMS = "init_params";
+	public static final String INIT_PARAMS = "init_params";
 	private static final String IS_FIRST_START_APP = "isFirstStartApp";
 
 	@Override
@@ -23,7 +23,6 @@ public class WelcomeActivity extends Activity {
 	private void initGuide() {
 		SharedPreferences sp = getSharedPreferences(INIT_PARAMS, MODE_PRIVATE);
 		boolean isFirstStartApp = sp.getBoolean(IS_FIRST_START_APP, true);
-		isFirstStartApp = true;
 		if (isFirstStartApp) {
 			startActivity(new Intent(this, GuideActivity.class));
 			SharedPreferences.Editor editor = sp.edit();

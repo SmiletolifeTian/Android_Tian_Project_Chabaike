@@ -21,18 +21,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/searchico" />
-
             <EditText
                 android:id="@+id/et_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/img_more_search"
+                android:background="@drawable/bg_seach_input"
                 android:hint="关键字"
-                android:paddingLeft="30dp" />
+                android:paddingBottom="5dp"
+                android:paddingLeft="38dp"
+                android:paddingTop="5dp" />
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/abc_ic_search_api_holo_light" />
 
             <ImageView
                 android:id="@+id/img_more_search"
@@ -76,7 +82,7 @@
 
         <TextView
             android:id="@+id/tx_favorite"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
@@ -92,14 +98,14 @@
 
         <TextView
             android:id="@+id/tx_log_visit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="查看访问记录"
             android:textSize="18sp" />
-        
+
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:background="@drawable/shoucangjia"
@@ -109,7 +115,7 @@
 
         <TextView
             android:id="@+id/tx_copyright_info"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
@@ -125,7 +131,7 @@
 
         <TextView
             android:id="@+id/tx_feed_back"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="意见反馈"

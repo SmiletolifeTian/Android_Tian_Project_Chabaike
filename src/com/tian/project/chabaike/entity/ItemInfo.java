@@ -1,17 +1,18 @@
 package com.tian.project.chabaike.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class HeadLineContent implements Serializable {
-	private static final long serialVersionUID = -790879193654262735L;
-	private HeadLineContentData data;
+public class ItemInfo implements Serializable {
+	private static final long serialVersionUID = -6277308745748191619L;
+	private List<ItemInfoData> data;
 	private String errorMessage;
 
-	public HeadLineContentData getData() {
+	public List<ItemInfoData> getData() {
 		return data;
 	}
 
-	public void setData(HeadLineContentData data) {
+	public void setData(List<ItemInfoData> data) {
 		this.data = data;
 	}
 

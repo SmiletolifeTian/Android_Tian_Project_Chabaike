@@ -3,28 +3,28 @@ package com.tian.project.chabaike.task;
 import com.alibaba.fastjson.JSON;
 import com.tian.project.chabaike.activity.ContentActivity.ViewHolder;
 import com.tian.project.chabaike.common.CommonJson;
-import com.tian.project.chabaike.entity.HeadLineContent;
+import com.tian.project.chabaike.entity.ContentInfo;
 
 import android.os.AsyncTask;
 
-public class ContentActivityTask extends
-		AsyncTask<String, Void, HeadLineContent> {
+public class ContentInfoTask extends
+		AsyncTask<String, Void, ContentInfo> {
 	private ViewHolder viewHolder;
 
-	public ContentActivityTask(ViewHolder viewHolder) {
+	public ContentInfoTask(ViewHolder viewHolder) {
 		this.viewHolder = viewHolder;
 	}
 
 	@Override
-	protected HeadLineContent doInBackground(String... params) {
+	protected ContentInfo doInBackground(String... params) {
 		String json = CommonJson.getJson(params[0]);
-		HeadLineContent content = JSON.parseObject(json, HeadLineContent.class);
+		ContentInfo content = JSON.parseObject(json, ContentInfo.class);
 
 		return content;
 	}
 
 	@Override
-	protected void onPostExecute(HeadLineContent result) {
+	protected void onPostExecute(ContentInfo result) {
 		if (result != null) {
 			viewHolder.txTitle.setText(result.getData().getTitle());
 			viewHolder.txCreateTime.setText(result.getData().getCreate_time());

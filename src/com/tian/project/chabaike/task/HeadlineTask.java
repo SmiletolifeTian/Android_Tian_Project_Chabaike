@@ -2,14 +2,14 @@ package com.tian.project.chabaike.task;
 
 import com.alibaba.fastjson.JSON;
 import com.tian.project.chabaike.common.CommonJson;
-import com.tian.project.chabaike.entity.HeadLine;
+import com.tian.project.chabaike.entity.ItemInfo;
 import com.tian.project.chabaike.entity.HomePage;
 
 import android.os.AsyncTask;
 
 public class HeadlineTask extends AsyncTask<String, Void, Void> {
 	private HomePage homePage;
-	private HeadLine headLine;
+	private ItemInfo headLine;
 	private HeadlineTaskComplete headlineTaskComplete;
 
 	public HeadlineTask(HeadlineTaskComplete headlineTaskComplete) {
@@ -24,10 +24,10 @@ public class HeadlineTask extends AsyncTask<String, Void, Void> {
 			homePage = JSON.parseObject(json, HomePage.class);
 
 			json = CommonJson.getJson(params[1]);
-			headLine = JSON.parseObject(json, HeadLine.class);
+			headLine = JSON.parseObject(json, ItemInfo.class);
 		} else {
 			json = CommonJson.getJson(params[0]);
-			headLine = JSON.parseObject(json, HeadLine.class);
+			headLine = JSON.parseObject(json, ItemInfo.class);
 		}
 
 		return null;
@@ -39,7 +39,7 @@ public class HeadlineTask extends AsyncTask<String, Void, Void> {
 	}
 
 	public interface HeadlineTaskComplete {
-		void getData(HomePage homePage, HeadLine headLine);
+		void getData(HomePage homePage, ItemInfo itemInfo);
 
 	}
 

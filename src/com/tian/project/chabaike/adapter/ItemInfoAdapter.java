@@ -9,32 +9,32 @@ import android.widget.TextView;
 
 import com.loopj.android.image.SmartImageView;
 import com.tian.project.chabaike.R;
-import com.tian.project.chabaike.entity.HeadLine;
-import com.tian.project.chabaike.entity.HeadLineData;
+import com.tian.project.chabaike.entity.ItemInfo;
+import com.tian.project.chabaike.entity.ItemInfoData;
 
-public class HeadlineAdapter extends BaseAdapter {
+public class ItemInfoAdapter extends BaseAdapter {
 	private Context context;
-	private HeadLine headLine;
+	private ItemInfo itemInfo;
 
-	public HeadlineAdapter(Context context, HeadLine headLine) {
+	public ItemInfoAdapter(Context context, ItemInfo itemInfo) {
 		this.context = context;
-		this.headLine = headLine;
+		this.itemInfo = itemInfo;
 	}
 
 	@Override
 	public int getCount() {
-		if (headLine != null && headLine.getData() != null
-				&& headLine.getData().size() > 0) {
-			return headLine.getData().size();
+		if (itemInfo != null && itemInfo.getData() != null
+				&& itemInfo.getData().size() > 0) {
+			return itemInfo.getData().size();
 		}
 		return 0;
 	}
 
 	@Override
 	public Object getItem(int position) {
-		if (headLine != null && headLine.getData() != null
-				&& headLine.getData().size() > 0) {
-			return headLine.getData().get(position);
+		if (itemInfo != null && itemInfo.getData() != null
+				&& itemInfo.getData().size() > 0) {
+			return itemInfo.getData().get(position);
 		}
 		return null;
 	}
@@ -67,9 +67,11 @@ public class HeadlineAdapter extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		HeadLineData data = (HeadLineData) getItem(position);
+		ItemInfoData data = (ItemInfoData) getItem(position);
 		if (data != null) {
-			viewHolder.imgIcon.setImageUrl(data.getWap_thumb());
+			if (data.getWap_thumb().length() > 0) {
+				viewHolder.imgIcon.setImageUrl(data.getWap_thumb());
+			}
 			viewHolder.txCreateTime.setText(data.getCreate_time());
 			viewHolder.txNickname.setText(data.getNickname());
 			viewHolder.txSource.setText(data.getSource());

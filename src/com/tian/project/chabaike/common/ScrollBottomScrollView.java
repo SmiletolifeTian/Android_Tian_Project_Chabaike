@@ -25,7 +25,9 @@ public class ScrollBottomScrollView extends ScrollView {
 	protected void onScrollChanged(int l, int t, int oldl, int oldt) {
 		if (t + getHeight() >= computeVerticalScrollRange()) {
 			// ScrollView滑动到底部了
-			scrollBottomListener.scrollBottom();
+			if (scrollBottomListener != null) {
+				scrollBottomListener.scrollBottom();
+			}
 		}
 	}
 

@@ -2,15 +2,15 @@ package com.tian.project.chabaike.entity;
 
 import java.io.Serializable;
 
-public class HeadLineData implements Serializable {
-	private static final long serialVersionUID = -1504029004133568592L;
+public class ContentInfoData implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String title;
 	private String source;
-	private String description;
-	private String wap_thumb;
+	private String wap_content;
 	private String create_time;
-	private String nickname;
+	private String author;
+	private String weiboUrl;
 
 	public String getId() {
 		return id;
@@ -36,20 +36,12 @@ public class HeadLineData implements Serializable {
 		this.source = source;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getWap_content() {
+		return wap_content;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getWap_thumb() {
-		return wap_thumb;
-	}
-
-	public void setWap_thumb(String wap_thumb) {
-		this.wap_thumb = wap_thumb;
+	public void setWap_content(String wap_content) {
+		this.wap_content = wap_content;
 	}
 
 	public String getCreate_time() {
@@ -60,12 +52,20 @@ public class HeadLineData implements Serializable {
 		this.create_time = create_time;
 	}
 
-	public String getNickname() {
-		return nickname;
+	public String getAuthor() {
+		return author;
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getWeiboUrl() {
+		return weiboUrl;
+	}
+
+	public void setWeiboUrl(String weiboUrl) {
+		this.weiboUrl = weiboUrl;
 	}
 
 }

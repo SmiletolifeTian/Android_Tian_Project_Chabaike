@@ -1,6 +1,5 @@
 package com.tian.project.chabaike.fragment;
 
-import android.R.integer;
 import android.content.Context;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;

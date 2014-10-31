@@ -9,9 +9,13 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.SAXException;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.AsyncTask;
 
+import com.tian.project.chabaike.common.CommonDialog;
+import com.tian.project.chabaike.common.CommonDialog.ConfirmObject;
 import com.tian.project.chabaike.defaulthandler.UpdateHandler;
 import com.tian.project.chabaike.entity.Update;
 
@@ -50,7 +54,27 @@ public class UpdateTask extends AsyncTask<String, Void, Void> {
 		try {
 			int currentVersion = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
 			if (update.getVersion() > currentVersion) {
-				
+				ConfirmObject confirmObject = new ConfirmObject();
+				confirmObject.context = context;
+				confirmObject.message = update.getMessage();
+				confirmObject.title = update.getName();
+				confirmObject.positiveText = "Éý¼¶";
+				confirmObject.positiveListener = new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						//Éý¼¶
+						
+					}
+				};
+				confirmObject.negativeText = "ºöÂÔ";
+				confirmObject.negativeListener = new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						//ºöÂÔ
+						
+					}
+				};
+				CommonDialog.confirm(confirmObject);
 
 			}
 		} catch (NameNotFoundException e) {

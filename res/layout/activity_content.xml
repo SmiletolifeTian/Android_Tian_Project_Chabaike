@@ -4,6 +4,7 @@
     android:layout_height="match_parent" >
 
     <ScrollView
+        android:id="@+id/sv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -47,7 +48,11 @@
             <WebView
                 android:id="@+id/wv_wap_content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:background="#FFFFFF"
+                android:layout_height="wrap_content" />
+            <View android:layout_width="match_parent"
+                android:background="#FFFFFF"
+                android:layout_height="50dp"/>
         </LinearLayout>
     </ScrollView>
 
@@ -55,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:orientation="horizontal" 
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true" >
 
         <Button
             android:id="@+id/btn_back"

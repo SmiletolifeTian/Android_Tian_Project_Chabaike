@@ -15,7 +15,7 @@ public class CommonDialog {
 		builder.show();
 	}
 	
-	public class ConfirmObject{
+	public static class ConfirmObject{
 		public Context context;
 		public String title;
 		public String message;

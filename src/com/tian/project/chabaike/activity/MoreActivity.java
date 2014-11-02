@@ -19,6 +19,7 @@ public class MoreActivity extends Activity implements OnClickListener {
 	private TextView txFavorite;
 	private ImageView imgSearch;
 	private EditText edSearch;
+	private TextView txCopyrightInfo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,8 @@ public class MoreActivity extends Activity implements OnClickListener {
 		imgSearch = (ImageView) findViewById(R.id.img_more_search);
 		imgSearch.setOnClickListener(this);
 		edSearch = (EditText) findViewById(R.id.et_search);
+		txCopyrightInfo = (TextView) findViewById(R.id.tx_copyright_info);
+		txCopyrightInfo.setOnClickListener(this);
 	}
 
 	@Override
@@ -71,6 +74,9 @@ public class MoreActivity extends Activity implements OnClickListener {
 			}else{
 				Toast.makeText(this, "«Î ‰»Îπÿº¸◊÷", Toast.LENGTH_SHORT).show();
 			}
+			break;
+		case R.id.tx_copyright_info:
+			startActivity(new Intent(this,AboutUsActivity.class));
 			break;
 
 		default:

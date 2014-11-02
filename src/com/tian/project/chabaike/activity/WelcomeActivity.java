@@ -24,6 +24,7 @@ public class WelcomeActivity extends Activity {
 		SharedPreferences sp = getSharedPreferences(INIT_PARAMS, MODE_PRIVATE);
 		boolean isFirstStartApp = sp.getBoolean(IS_FIRST_START_APP, true);
 		if (isFirstStartApp) {
+			this.finish();
 			startActivity(new Intent(this, GuideActivity.class));
 			SharedPreferences.Editor editor = sp.edit();
 			editor.putBoolean(IS_FIRST_START_APP, false);
@@ -38,6 +39,7 @@ public class WelcomeActivity extends Activity {
 
 				@Override
 				public void onFinish() {
+					WelcomeActivity.this.finish();
 					startActivity(new Intent(WelcomeActivity.this,
 							MainActivity.class));
 				}

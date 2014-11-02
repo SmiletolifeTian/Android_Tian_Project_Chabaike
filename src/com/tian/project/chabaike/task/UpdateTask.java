@@ -10,11 +10,15 @@ import org.xml.sax.SAXException;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.AsyncTask;
 
+import com.tian.project.chabaike.activity.MainActivity;
+import com.tian.project.chabaike.activity.WelcomeActivity;
 import com.tian.project.chabaike.common.CommonDialog;
+import com.tian.project.chabaike.common.CommonInterface;
 import com.tian.project.chabaike.common.CommonDialog.ConfirmObject;
 import com.tian.project.chabaike.defaulthandler.UpdateHandler;
 import com.tian.project.chabaike.entity.Update;
@@ -52,6 +56,9 @@ public class UpdateTask extends AsyncTask<String, Void, Void> {
 	@Override
 	protected void onPostExecute(Void result) {
 		try {
+			if(update == null){
+				return;
+			}
 			int currentVersion = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
 			if (update.getVersion() > currentVersion) {
 				ConfirmObject confirmObject = new ConfirmObject();
@@ -63,7 +70,8 @@ public class UpdateTask extends AsyncTask<String, Void, Void> {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						//Éý¼¶
-						
+						APKDownLoadTask task = new APKDownLoadTask(context);
+						task.execute(CommonInterface.URI_APK_DOWNLOAD);
 					}
 				};
 				confirmObject.negativeText = "ºöÂÔ";
@@ -71,7 +79,11 @@ public class UpdateTask extends AsyncTask<String, Void, Void> {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						//ºöÂÔ
-						
+						SharedPreferences sp = context.getSharedPreferences(WelcomeActivity.INIT_PARAMS, Context.MODE_PRIVATE);
+						SharedPreferences.Editor editor = sp.edit();
+						editor.putBoolean(MainActivity.KEY_NEED_UPDATE, false);
+						editor.commit();
+						dialog.dismiss();
 					}
 				};
 				CommonDialog.confirm(confirmObject);

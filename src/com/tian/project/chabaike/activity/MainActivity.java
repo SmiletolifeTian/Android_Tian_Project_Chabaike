@@ -10,28 +10,35 @@ import android.app.ActionBar.TabListener;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.inputmethodservice.Keyboard;
+import android.inputmethodservice.Keyboard.Key;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.tian.project.chabaike.R;
+import com.tian.project.chabaike.common.CommonInterface;
 import com.tian.project.chabaike.fragment.OtherFragment;
 import com.tian.project.chabaike.fragment.HeadLineFragment;
 import com.tian.project.chabaike.fragment.HomePageViewpPager;
+import com.tian.project.chabaike.task.UpdateTask;
 
 public class MainActivity extends FragmentActivity implements TabListener,
 		OnPageChangeListener {
-	private static final String KEY_IS_UPDATE = "is_update";
-	private static final int ACTIONBAR_ITEM_COUNT = 6;
+	public static final String KEY_NEED_UPDATE = "is_update";
 	public static final String KEY_FRAGMENT_ID = "fragment_id";
+	private static final int ACTIONBAR_ITEM_COUNT = 6;
 	private ViewPager vpMain;
 	private List<Fragment> fragments;
+	private boolean isExit;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,9 +93,10 @@ public class MainActivity extends FragmentActivity implements TabListener,
 
 	private void initUpdate() {
 		SharedPreferences sp = getSharedPreferences(WelcomeActivity.INIT_PARAMS, MODE_PRIVATE);
-		boolean isUpdate = sp.getBoolean(KEY_IS_UPDATE, true);
+		boolean isUpdate = sp.getBoolean(KEY_NEED_UPDATE, true);
 		if(isUpdate){
-			
+			UpdateTask task = new UpdateTask(this);
+			task.execute(CommonInterface.URI_UPDATE);
 		}
 	}
 
@@ -155,6 +163,36 @@ public class MainActivity extends FragmentActivity implements TabListener,
 			return fragments.size();
 		}
 
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+			exit();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	private void exit() {
+		if(!isExit){
+			isExit = true;
+			Toast.makeText(this, "请再按一次退出程序", Toast.LENGTH_SHORT).show();
+			new CountDownTimer(2000,2000) {
+				@Override
+				public void onTick(long millisUntilFinished) {
+					
+				}
+				@Override
+				public void onFinish() {
+					isExit = false;
+				}
+			}.start();
+		}else{
+			//结束当前应用程序
+			android.os.Process.killProcess(android.os.Process.myPid());   
+			System.exit(0);
+		}
 	}
 
 }

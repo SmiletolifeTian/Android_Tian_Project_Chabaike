@@ -65,6 +65,7 @@ public class GuideActivity extends Activity implements OnPageChangeListener {
 		imgViews[ids.length-1].setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				GuideActivity.this.finish();
 				startActivity(new Intent(GuideActivity.this,MainActivity.class));
 			}
 		});
